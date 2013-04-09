@@ -1,0 +1,3 @@
+class Payslip < OpenStruct
+
+end

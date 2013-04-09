@@ -38,3 +38,5 @@ gem 'jbuilder', '~> 1.0.1'
 # gem 'debugger'
 
 gem 'sucker_punch'
+
+gem "letter_opener", :group => :development

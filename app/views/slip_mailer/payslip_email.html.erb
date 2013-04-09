@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>Your Payslip</title>
+    
+  </head>
+  <body style="padding: 0; background: #eaeaea; margin: 0;">
+    <center>
+      <div class="payslip-bg" style="background: #eaeaea;">
+        <table class="main-container" cellspacing="0" style="padding: 0 0 36px; margin: 0;" width="700" cellpadding="0">
+          <tr><td><table class="preliminaries" cellspacing="0" style="padding: 0; margin: 0 auto;" width="648" cellpadding="0">
+            <tr>
+              <td><img src="http://mindvalley.com/media/images/payslip/logo.png" style="font-weight: bold; font-size: 20px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; text-align: right; padding: 0; margin: 20px 5px 5px; color: #999;" /></td>
+              <td><p class="date" style="font-weight: bold; font-size: 20px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #999; text-align: right; margin: 20px 5px 5px;"><%= Time.now.strftime('%B %d') %></p></td>
+            </tr>
+          </table></td></tr>
+
+          <tr><td><table class="content" cellspacing="0" style="padding: 0; margin: 0 auto;" width="648" cellpadding="0">
+            <tr><td><table class="header" cellspacing="0" style="border-top: 2px solid #ccc; padding: 12px 8px 0 16px; margin: 0 auto; border-right: 2px solid #ccc; height: 120px; border-left: 2px solid #ccc; background: white;" width="648" cellpadding="0">
+              <tr>
+                <td valign="top" width="340"><h1 style="font-size: 28px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; margin: 0;">Hi, <%= @payslip.full_name %>!</h1><p style="font-family: Georgia; margin: 0; font-size: 14px;"><em>Employee since <%= @payslip.date_joined_mv.strftime("%B %y") %> (<%= time_ago_in_words(@payslip.date_joined_mv) %>)</em></p></td>
+                <td valign="bottom"><img src="http://mindvalley.com/media/images/payslip/cash.png" style="margin: 0; padding: 0;" /></td>
+                <td valign="center"><p style="font-family: Georgia; margin: 0; font-size: 14px;"><em>Your gross salary this month:</em><br /><p class="upper_nett" style="font-size: 28px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: black; margin: 8px 0 0;"><strong><%= number_to_currency(@payslip.gross_salary, :unit => '$') %></strong></p></p></td>
+              </tr>
+            </table></td></tr>
+           
+            <tr><td><table class="bonus" cellspacing="0" style="padding: 12px; border: 2px solid #ccc; margin: 0; background: #fffdd6;" width="666" cellpadding="0">
+              <tr><td><p class="bonus_intro" style="font-size: 14px; font-weight: bold; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #990000; text-align: center; margin: 0;">YOUR BONUS THIS MONTH</p></td></tr>
+              <tr><td><p class="bonus_amount" style="font-size: 48px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; text-align: center; margin: 0;"><strong><%= number_to_currency(@payslip.bonus, :unit => '$') %></strong></p></td></tr>
+              <tr><td><p class="bonus_caption" style="font-size: 14px; font-family: Georgia; text-align: center; margin: 0;"><em>(<%= number_to_percentage(@payslip.bonus_percentage, :precision => 0) %> of your base salary!)</em></p></td></tr>
+            </table></td></tr>
+            
+            <tr><td><table class="content-body" cellspacing="0" style="border-bottom: 2px solid #ccc; border-right: 2px solid #ccc; border-left: 2px solid #ccc; margin: 0 auto; padding: 0; background: white;" width="648" cellpadding="0">
+              <tr>
+                <td><table class="income" cellspacing="0" style="padding: 12px 16px; margin: 0;" width="648" cellpadding="0">
+                  <tr><th colspan="2"><p style="font-weight: normal; font-size: 14px; font-family: Georgia; color: black; text-align: left; font-style: italic; margin: 0 0 16px;">Income:</p></th></tr>
+                  <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0 0 8px;">Basic earned for the month <%= @payslip.days_worked_percentage %>% <em style="font-family: Georgia;">(<%= @days_worked %> working days)</em></p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; text-align: right; margin: 0 0 8px;"><%= number_to_currency(@payslip.basic_earned) %></p></td></tr>
+                  <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0 0 8px;">Bonus</p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; text-align: right; margin: 0 0 8px;"> <%= number_to_currency(@payslip.bonus) %></p></td></tr>
+                </table></td>
+              </tr>
+              <tr>
+                <td><table class="total_gross" cellspacing="0" style="border-top: 1px solid #ccc; padding: 0; margin: auto; border-bottom: 1px solid #ccc; text-align: right;" width="616" cellpadding="0">
+                  <tr><td><p class="section_total" style="padding: 12px 0; font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: black; margin: 0;"><img src="http://mindvalley.com/media/images/payslip/a.png" style="vertical-align: -7px; padding: 0 12px; margin: 0;" /><strong>TOTAL GROSS</strong></p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: black; text-align: right; padding: 12px 0; margin: 0;"><strong><%= number_to_currency(@payslip.gross_salary) %></strong></p></td></tr>
+                </table></td>
+              </tr>
+              <tr>
+                <td><table class="adjustments" cellspacing="0" style="padding: 12px 16px; margin: 0;" width="648" cellpadding="0">
+                  <tr><th colspan="2"><p style="font-weight: normal; font-size: 14px; font-family: Georgia; color: black; text-align: left; font-style: italic; margin: 0 0 16px;">Adjustments:</p></th></tr>
+                  <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0 0 8px;">TAX</p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; text-align: right; margin: 0 0 8px;">(<%= number_to_currency(@payslip.tax, :abs => true) %>)</p></td></tr>
+                  <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0 0 8px;">EPF</p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; text-align: right; margin: 0 0 8px;">(<%= number_to_currency(@payslip.epf_employee, :abs => true) %>)</p></td></tr>
+                  <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0 0 8px;">SOCSO</p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; text-align: right; margin: 0 0 8px;">(<%= number_to_currency(@payslip.socso, :abs => true) %>)</p></td></tr>
+                  <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0 0 8px;">ZAKAT</p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; text-align: right; margin: 0 0 8px;">(<%= number_to_currency(@payslip.zakat, :abs => true) %>)</p></td></tr>
+                  <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0 0 8px;">Others:</p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; text-align: right; margin: 0 0 8px;"><%= number_to_currency(@payslip.adjustments, :use_parenthesis => true) %></p></td></tr>
+                  <tr><td><p class="nicole_remarks" style="font-size: 14px; line-height: 8px; font-family: Georgia; color: #666; margin: 0 0 8px;"><em><%=h @payslip.comments %></em></p></td><td></td></tr>
+                </table></td>
+              </tr>
+              <tr>
+                <td><table class="total_adjustments" cellspacing="0" style="border-top: 1px solid #ccc; padding: 0; margin: auto; border-bottom: 1px solid #ccc; text-align: right;" width="616" cellpadding="0">
+                  <tr><td><p class="section_total" style="padding: 12px 0; font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: black; margin: 0;"><img src="http://mindvalley.com/media/images/payslip/b.png" style="vertical-align: -7px; padding: 0 12px; margin: 0;" /><strong>TOTAL ADJUSTMENTS</strong></p></td><td><p class="cash" style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: black; text-align: right; padding: 12px 0; margin: 0;"><strong><%= number_to_currency(@payslip.total_deductions, :use_parenthesis => true) %></strong></p></td></tr>
+                </table></td>
+              </tr>
+              <tr>
+                <td><table class="nett" cellspacing="0" style="padding: 16px 0 8px; border-bottom: double 4px #ccc; margin: 0 auto 48px;" width="616" cellpadding="0">
+                  <tr><td><p style="font-size: 28px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: black; margin: 0 0 8px;"><strong>NETT&nbsp;&nbsp;<img src="http://mindvalley.com/media/images/payslip/a.png" style="vertical-align: -3px; padding: 0; margin: 0;" />&nbsp;<span style="color: #666;">+</span>&nbsp;<img src="http://mindvalley.com/media/images/payslip/b.png" style="vertical-align: -3px; padding: 0; margin: 0;" /></strong></p></td><td><p class="cash" style="font-size: 28px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: black; text-align: right; margin: 0 0 8px;"><strong><%= number_to_currency(@payslip.net_salary) %></strong></p></td></tr>
+                </table></td>
+              </tr>
+
+              <tr><td><table class="footnotes" cellspacing="0" style="padding: 24px 16px 32px; background: #f0f0f0; margin: 0;" width="648" cellpadding="0">
+                <tr><th width="340px"><p style="font-weight: normal; font-size: 14px; font-family: Georgia; color: black; text-align: left; font-style: italic; margin: 0 0 16px;"><span style="font-family: Georgia;"><em style="color: black;">Addendum:</em></span></p></th></tr>
+                <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0;">Base Salary</p></td><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0;">EPF <span style="font-family: Georgia;"><em>(Employer's Contribution)</em></span></p></td></tr>
+                <tr><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0;"><strong style="color: black;"><%= number_to_currency(@payslip.base_salary) %></strong></p></td><td><p style="font-size: 16px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #666; margin: 0;"><strong style="color: black;"><%= number_to_currency(@payslip.epf_employer) %></strong></p></td></tr>
+              </table></td></tr>
+            </table></td></tr>
+            <tr><td><span>&nbsp;</span></td></tr>
+            <tr><td><p class="small" style="font-size: 12px; font-family: 'Helvetica Neue',Arial,Helvetica,Geneva,sans-serif; color: rgb(102, 102, 102); text-align: center; margin: 0pt;">Identification no. <%= @payslip.identification_no %> <strong>&middot;</strong> EPF no. <%= @epf_no %> <strong>&middot;</strong> Tax Reference no. <%= @payslip.tax_ref_no %></p></td></tr>
+          </table></td></tr>
+        </table>
+      </div>
+    </center>
+  </body>
+</html>
