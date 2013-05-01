@@ -5,7 +5,7 @@ class SlipMailer < ActionMailer::Base
 
   def payslip_email(payslip)
     @payslip = payslip
-    @payslip.date_joined = Date.parse(payslip.date_joined)
+    @payslip.date_joined = Date.strptime payslip.date_joined, '%m/%d/%Y'
     @payslip.bonus_percentage = (payslip.bonus.to_f / payslip.base_salary.to_f) * 100
     mail(to: @payslip.email)
   end
