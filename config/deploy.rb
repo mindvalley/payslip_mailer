@@ -1,6 +1,6 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
-require 'airbrake/capistrano'
+# require 'airbrake/capistrano'
 load 'deploy/assets'
 
 load "config/recipes/base"
@@ -8,9 +8,9 @@ load "config/recipes/base"
 set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 set :rvm_type, :user
 set :rvm_install_ruby, :install
-set :application, "MindvalleyDaily"
-set :server_name, 'daily.mindvalley.net'
-set :repository,  "git@github.com:mindvalley/daily_v2.git"
+set :application, "PayslipMailer"
+set :server_name, 'payslip_mailer.mvstg.com'
+set :repository,  "git@github.com:mindvalley/payslip_mailer.git"
 set :user, "mvdev"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :use_sudo, false
