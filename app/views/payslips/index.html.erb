@@ -1,1 +1,9 @@
-<h1>Hello</h1>
+<h1>Payslip Upload</h1>
+
+<%= form_for @payslip, :html => { :multipart => true } do |f| %>
+  <%= f.label "File" %>
+  <%= f.file_field :file %>
+  <p>
+    <%= f.submit 'Upload' %>
+  </p>
+<% end %>

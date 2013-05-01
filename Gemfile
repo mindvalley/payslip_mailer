@@ -40,3 +40,4 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'sucker_punch'
 
 gem "letter_opener", :group => :development
+gem 'activemodel'
