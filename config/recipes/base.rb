@@ -17,6 +17,7 @@ load "config/recipes/ruby"
 load "config/recipes/thin"
 load "config/recipes/unicorn"
 load "config/recipes/rainbows"
+load "config/recipes/puma"
 load "config/recipes/mongodb"
 
 namespace :deploy do

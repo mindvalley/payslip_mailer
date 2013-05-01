@@ -40,15 +40,9 @@ set :stages, %w(production staging)
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
-namespace :deploy do
-  task :restart do
-    run "/etc/init.d/rainbows_#{application} restart"
-  end
-
-  task :stop do
-    run "/etc/init.d/rainbows_#{application} stop"
-  end
-end
+after 'deploy:stop', 'puma:stop'
+after 'deploy:start', 'puma:start'
+after 'deploy:restart', 'puma:restart'
 
 namespace :foreman do
   desc 'Export the Procfile to Ubuntu upstart scripts'
