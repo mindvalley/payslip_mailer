@@ -12,7 +12,7 @@ namespace :puma do
   desc 'Start puma'
   task :start, :roles => lambda { fetch(:puma_role) }, :on_no_matching_servers => :continue do
     puma_env = fetch(:rack_env, fetch(:rails_env, 'production'))
-    run "cd #{current_path} && #{fetch(:puma_cmd)} -q --daemon -e #{puma_env} -b 'unix://#{shared_path}/sockets/puma#{application}.sock' -S #{fetch(:puma_state)} --control 'unix://#{shared_path}/sockets/pumactl.sock'", :pty => false
+    run "cd #{current_path} && #{fetch(:puma_cmd)} -q --daemon -e #{puma_env} -b 'unix:/tmp/puma.#{application}.sock' -S #{fetch(:puma_state)} --control 'unix://#{shared_path}/sockets/pumactl.sock'", :pty => false
   end
 
   desc 'Stop puma'
