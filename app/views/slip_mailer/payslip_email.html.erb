@@ -12,7 +12,7 @@
           <tr><td><table class="preliminaries" cellspacing="0" style="padding: 0; margin: 0 auto;" width="648" cellpadding="0">
             <tr>
               <td><img src="http://mindvalley.com/media/images/payslip/logo.png" style="font-weight: bold; font-size: 20px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; text-align: right; padding: 0; margin: 20px 5px 5px; color: #999;" /></td>
-              <td><p class="date" style="font-weight: bold; font-size: 20px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #999; text-align: right; margin: 20px 5px 5px;"><%= Time.now.strftime('%B %d') %></p></td>
+              <td><p class="date" style="font-weight: bold; font-size: 20px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; color: #999; text-align: right; margin: 20px 5px 5px;"><%= @payslip.payslip_date.strftime('%B %d') %></p></td>
             </tr>
           </table></td></tr>
 

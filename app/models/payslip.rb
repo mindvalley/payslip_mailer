@@ -21,6 +21,7 @@ class Payslip
     :comments,
     :total_deductions,
     :net_salary,
+    :payslip_date,
 
     :bonus_percentage
 
