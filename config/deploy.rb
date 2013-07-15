@@ -49,7 +49,7 @@ namespace :deploy do
   end
 
   task :migrate do
-    Rails.logger.info '----------------theres nothing to migrate--------------------'
+   
   end
 end
 
