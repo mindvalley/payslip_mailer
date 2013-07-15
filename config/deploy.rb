@@ -1,6 +1,7 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 require 'puma/capistrano'
+require 'capistrano/ext/multistage'
 # require 'airbrake/capistrano'
 load 'deploy/assets'
 
@@ -16,7 +17,8 @@ set :user, "mvdev"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :use_sudo, false
 set :git_enable_submodules, 1
-
+set :stages, %w(production staging)
+set :default_stage, "staging"
 set :deploy_via, :remote_cache
 
 # so there is no need to add specific server keys
@@ -37,8 +39,7 @@ default_run_options[:pty] = true
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-set :stages, %w(production staging)
-set :default_stage, "staging"
+
 
 after 'deploy:stop', 'puma:stop'
 after 'deploy:start', 'puma:start'
@@ -52,10 +53,9 @@ namespace :foreman do
 
   end
 
-  desc "Start the application services"
-  task :start, :roles => :app do
-
-    sudo "start #{application}"
+  desc "Start the application"
+  task :start, :roles => :app, :except => { :no_release => true } do
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec puma -t 8:32 -b 'unix://#{shared_path}/sockets/puma.sock' -S #{shared_path}/sockets/puma.state --control 'unix://#{shared_path}/sockets/pumactl.sock' >> #{shared_path}/log/puma-#{rails_env}.log 2>&1 &", :pty => false
   end
 
   desc "Stop the application services"

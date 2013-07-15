@@ -1,7 +1,4 @@
-Capistrano::Configuration.instance.load do
-  after 'deploy:stop', 'puma:stop'
-  after 'deploy:start', 'puma:start'
-  after 'deploy:restart', 'puma:restart'
+
 
   # Ensure the tmp/sockets directory is created by the deploy:setup task and
   # symlinked in by the deploy:update task. This is not handled by Capistrano
@@ -62,4 +59,3 @@ Capistrano::Configuration.instance.load do
     config.load
     config
   end
-end
