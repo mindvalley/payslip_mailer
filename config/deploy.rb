@@ -47,6 +47,10 @@ namespace :deploy do
   task :stop do
     run "/etc/init.d/rainbows_#{application} stop"
   end
+
+  task :migrate do
+    Rails.logger.info '----------------theres nothing to migrate--------------------'
+  end
 end
 
 namespace :foreman do
