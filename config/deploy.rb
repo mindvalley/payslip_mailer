@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
+require 'puma/capistrano'
 # require 'airbrake/capistrano'
 load 'deploy/assets'
 
@@ -38,7 +39,6 @@ set :scm, :git
 
 set :stages, %w(production staging)
 set :default_stage, "staging"
-require 'capistrano/ext/multistage'
 
 after 'deploy:stop', 'puma:stop'
 after 'deploy:start', 'puma:start'
