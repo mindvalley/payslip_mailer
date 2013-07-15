@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 1.0.1'
 # Use puma as the app server
 # gem 'puma', '~> 2.0'
 gem 'rainbows'
-
+gem 'eventmachine'
 # Deploy with Capistrano
 gem 'capistrano', group: :development
 gem 'capistrano-ext'
