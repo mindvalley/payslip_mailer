@@ -29,7 +29,8 @@ gem 'jbuilder', '~> 1.0.1'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use puma as the app server
-gem 'puma', '~> 2.0'
+# gem 'puma', '~> 2.0'
+gem 'rainbows'
 
 # Deploy with Capistrano
 gem 'capistrano', group: :development

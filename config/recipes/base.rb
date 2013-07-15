@@ -13,12 +13,10 @@ load "config/recipes/nginx_thin"
 load "config/recipes/nginx_unicorn"
 load "config/recipes/nginx_rainbows"
 load "config/recipes/nginx_passenger"
-load "config/recipes/nginx_puma"
 load "config/recipes/ruby"
 load "config/recipes/thin"
 load "config/recipes/unicorn"
 load "config/recipes/rainbows"
-load "config/recipes/puma"
 load "config/recipes/mongodb"
 
 namespace :deploy do
