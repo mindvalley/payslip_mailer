@@ -10,8 +10,9 @@ class SlipMailer < ActionMailer::Base
       @payslip.payslip_date = Date.strptime payslip.payslip_date, '%m/%d/%Y'
       @payslip.bonus_percentage = (payslip.bonus.to_f / payslip.base_salary.to_f) * 100
       mail(to: @payslip.email)
-    rescue
-      ErrorMailer.error_email(@payslip.email).deliver
+    rescue Exception => e
+      Rails.logger.error e.inspect
+      ErrorMailer.error_email(@payslip.email, e).deliver
     end
   end
 end
