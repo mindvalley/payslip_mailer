@@ -5,7 +5,7 @@ class ErrorMailer < ActionMailer::Base
   def error_email(staff_email, error)
   	@staff_email = staff_email
   	@error = error
-    mail(to: staff_email, subject: "#{@staff_email} #{Date.today} Error.")
+    mail(to: 'payroll@mindvalley.com', subject: "#{@staff_email} #{Date.today} Error.")
   end
 
 end
