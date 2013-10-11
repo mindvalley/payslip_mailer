@@ -6,7 +6,7 @@ load 'deploy/assets'
 
 load "config/recipes/base"
 
-set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
+set :rvm_ruby_string, 'ruby-1.9.3-p194'
 set :rvm_type, :user
 set :rvm_install_ruby, :install
 set :application, "PayslipMailer"
